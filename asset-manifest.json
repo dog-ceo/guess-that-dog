@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/guess-that-dog/static/css/main.1ee3ff47.chunk.css",
-    "main.js": "/guess-that-dog/static/js/main.84d98884.chunk.js",
-    "main.js.map": "/guess-that-dog/static/js/main.84d98884.chunk.js.map",
-    "runtime-main.js": "/guess-that-dog/static/js/runtime-main.207178d3.js",
-    "runtime-main.js.map": "/guess-that-dog/static/js/runtime-main.207178d3.js.map",
-    "static/js/2.76dc2a08.chunk.js": "/guess-that-dog/static/js/2.76dc2a08.chunk.js",
-    "static/js/2.76dc2a08.chunk.js.map": "/guess-that-dog/static/js/2.76dc2a08.chunk.js.map",
-    "index.html": "/guess-that-dog/index.html",
-    "static/css/main.1ee3ff47.chunk.css.map": "/guess-that-dog/static/css/main.1ee3ff47.chunk.css.map",
-    "static/js/2.76dc2a08.chunk.js.LICENSE.txt": "/guess-that-dog/static/js/2.76dc2a08.chunk.js.LICENSE.txt"
+    "main.css": "./static/css/main.84e15842.chunk.css",
+    "main.js": "./static/js/main.e293abeb.chunk.js",
+    "main.js.map": "./static/js/main.e293abeb.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.c04226b1.js",
+    "runtime-main.js.map": "./static/js/runtime-main.c04226b1.js.map",
+    "static/js/2.a66eb9e8.chunk.js": "./static/js/2.a66eb9e8.chunk.js",
+    "static/js/2.a66eb9e8.chunk.js.map": "./static/js/2.a66eb9e8.chunk.js.map",
+    "index.html": "./index.html",
+    "static/css/main.84e15842.chunk.css.map": "./static/css/main.84e15842.chunk.css.map",
+    "static/js/2.a66eb9e8.chunk.js.LICENSE.txt": "./static/js/2.a66eb9e8.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.207178d3.js",
-    "static/js/2.76dc2a08.chunk.js",
-    "static/css/main.1ee3ff47.chunk.css",
-    "static/js/main.84d98884.chunk.js"
+    "static/js/runtime-main.c04226b1.js",
+    "static/js/2.a66eb9e8.chunk.js",
+    "static/css/main.84e15842.chunk.css",
+    "static/js/main.e293abeb.chunk.js"
   ]
 }
