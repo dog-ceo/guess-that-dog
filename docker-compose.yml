@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+  train:
+    build: .
+    volumes:
+      - ./data:/train/data
+      - ./public:/train/web
+
+  predict:
+    image: tensorflow/serving
+    ports:
+      - 8501:8501
+    volumes:
+      - ./data/model:/models/model
