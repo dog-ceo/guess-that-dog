@@ -2,7 +2,7 @@
   "name": "guess-that-dog",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://threesquared.github.io/guess-that-dog/",
+  "homepage": ".",
   "dependencies": {
     "@tensorflow/tfjs": "^2.7.0",
     "@types/node": "^12.0.0",
