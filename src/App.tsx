@@ -1,172 +1,26 @@
-import React from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import * as tf from '@tensorflow/tfjs';
+import breeds from './lib/breeds';
 import './App.css';
 
 function App() {
-  const breeds = [
-    'affenpinscher',
-    'african',
-    'airedale',
-    'akita',
-    'appenzeller',
-    'australian shepherd',
-    'basenji',
-    'beagle',
-    'bluetick',
-    'borzoi',
-    'bouvier',
-    'boxer',
-    'brabancon',
-    'briard',
-    'norwegian buhund',
-    'boston bulldog',
-    'english bulldog',
-    'french bulldog',
-    'staffie',
-    'cairn',
-    'australian cattledog',
-    'chihuahua',
-    'chow',
-    'clumber',
-    'cockapoo',
-    'collie',
-    'border collie',
-    'coonhound',
-    'corgi',
-    'cardigan corgi',
-    'cotondetulear',
-    'dachshund',
-    'dalmatian',
-    'great dane',
-    'scottish deerhound',
-    'dhole',
-    'dingo',
-    'doberman',
-    'norwegian elkhound',
-    'entlebucher',
-    'eskimo',
-    'finnish lapphund',
-    'frise bichon',
-    'german shepherd',
-    'greyhound',
-    'italian greyhound',
-    'groenendael',
-    'havanese',
-    'afghan hound',
-    'basset hound',
-    'blood hound',
-    'english hound',
-    'ibizan hound',
-    'plott hound',
-    'walker hound',
-    'husky',
-    'keeshond',
-    'kelpie',
-    'komondor',
-    'kuvasz',
-    'labrador',
-    'leonberg',
-    'lhasa',
-    'malamute',
-    'malinois',
-    'maltese',
-    'bull mastiff',
-    'english mastiff',
-    'mtibetan astiff',
-    'mexican hairless',
-    'mixed breed',
-    'bernese mountain dog',
-    'swiss mountain dog',
-    'newfoundland',
-    'otterhound',
-    'caucasian ovcharka',
-    'papillon',
-    'pekinese',
-    'pembroke',
-    'miniature pinscher',
-    'pitbull',
-    'german pointer',
-    'longhair german pointer',
-    'pomeranian',
-    'miniature poodle',
-    'poodle',
-    'toy poodle',
-    'pug',
-    'puggle',
-    'pyrenees',
-    'redbone',
-    'chesapeake retriever',
-    'curly retriever',
-    'flatcoated retriever',
-    'golden retriever',
-    'rhodesian ridgeback',
-    'rottweiler',
-    'saluki',
-    'samoyed',
-    'schipperke',
-    'schnauzer',
-    'giant schnauzer',
-    'miniature schnauzer',
-    'english setter',
-    'gordon setter',
-    'irish setter',
-    'english sheepdog',
-    'shetland sheepdog',
-    'shiba',
-    'shihtzu',
-    'blenheim spaniel',
-    'brittany spaniel',
-    'cocker spaniel',
-    'irish spaniel',
-    'japanese spaniel',
-    'sussex spaniel',
-    'welsh spaniel',
-    'english springer',
-    'saint bernard',
-    'american terrier',
-    'australian terrier',
-    'bedlington terrier',
-    'border terrier',
-    'dandie terrier',
-    'fox terrier',
-    'irish terrier',
-    'kerryblue terrier',
-    'lakeland terrier',
-    'norfolk terrier',
-    'norwich terrier',
-    'patterdale terrier',
-    'russell terrier',
-    'scottish terrier',
-    'sealyham terrier',
-    'silky terrier',
-    'tibetan terrier',
-    'toy terrier',
-    'westhighland terrier',
-    'wheaten terrier',
-    'yorkshire terrier',
-    'vizsla',
-    'spanish waterdog',
-    'weimaraner',
-    'whippet',
-    'irish wolfhound'
-  ]
+  const [imgSrc, setImgSrc] = useState('');
+  const [message, setMessage] = useState('');
   const fileInput = React.useRef<HTMLInputElement>();
 
   async function handleClick() {
     fileInput.current.click()
   }
 
-  async function handleChange(event: any) {
-    document.getElementById('result').innerHTML = "Ummmm.....";
+  async function handleChange(event: ChangeEvent<HTMLInputElement>) {
+    setMessage('Ummmm.....');
 
     const model = await tf.loadGraphModel('model/1/model.json');
     const reader = new FileReader();
     const image = document.getElementById("img") as HTMLImageElement;
 
-
     reader.onload = async (event) => {
-      image.src = event.target.result as string;
-
+      setImgSrc(event.target.result as string);
 
       document.getElementById('main').style.backgroundImage = `url(${ event.target.result })`;
 
@@ -178,19 +32,12 @@ function App() {
         const batched = normalized.expandDims(0);
 
         const outputTensor = await model.predict(batched) as tf.Tensor;
-
         const prediction = await outputTensor.data();
 
-        let guess = Array.from(prediction).map(function(p, i) {
-          return {
-            probability: p,
-            breed: breeds[i - 1]
-          };
-        }).sort(function(a,b){
-          return b.probability-a.probability;
-        }).slice(0,1)[0];
-
-        console.log(guess.probability);
+        let guess = Array.from(prediction).map((probability, index) => ({
+          probability,
+          breed: breeds[index - 1]
+        })).sort((a,b) => b.probability-a.probability).slice(0,1)[0];
 
         const confidence = Math.round(guess.probability * 100);
 
@@ -210,7 +57,7 @@ function App() {
           word = 'only a little bit'
         }
 
-        document.getElementById('result').innerHTML = `So I'm ${word} sure that is a ${guess.breed}?`
+        setMessage(`So I'm ${word} sure that is a ${guess.breed}?`);
       }
     };
 
@@ -222,10 +69,10 @@ function App() {
       <div id="main">
         <div className="controls">
           <input type='file' ref={fileInput} onChange={handleChange} />
-          <button id='upload' onClick={handleClick} >Submit a dog image</button><br />
-          <div id="result"></div>
+          <button id='upload' onClick={handleClick} >Submit a dog image</button>
+          <div id="result">{message}</div>
         </div>
-        <img id="img"/>
+        <img alt="dog" id="img" src={imgSrc}/>
       </div>
     </div>
   );
