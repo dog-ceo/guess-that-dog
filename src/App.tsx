@@ -17,8 +17,12 @@ function App() {
     const reader = new FileReader();
     const image = document.getElementById("img") as HTMLImageElement;
 
+
     reader.onload = async (event) => {
       image.src = event.target.result as string;
+
+
+      document.getElementById('main').style.backgroundImage = `url(${ event.target.result })`;
 
       image.onload = async () => {
         const inputTensor = tf.browser.fromPixels(image);
@@ -69,7 +73,7 @@ function App() {
 
   return (
     <div>
-      <div className="main">
+      <div id="main">
         <div className="controls">
           <input type='file' ref={fileInput} onChange={handleChange} />
           <button id='upload' onClick={handleClick} >Upload a dog image</button><br />
