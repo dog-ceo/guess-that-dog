@@ -64,7 +64,7 @@ function App() {
           word = 'only a little bit'
         }
 
-        document.getElementById('result').innerHTML = `So I'm ${word} sure that is a ${guess.breed}`
+        document.getElementById('result').innerHTML = `So I'm ${word} sure that is a ${guess.breed}?`
       }
     };
 
@@ -76,7 +76,7 @@ function App() {
       <div id="main">
         <div className="controls">
           <input type='file' ref={fileInput} onChange={handleChange} />
-          <button id='upload' onClick={handleClick} >Upload a dog image</button><br />
+          <button id='upload' onClick={handleClick} >Submit a dog image</button><br />
           <div id="result"></div>
         </div>
         <img id="img"/>
