@@ -1,6 +1,6 @@
 # Guess That Dog
 
-A Tensorflow model trained on the [dog.ceo](https://dog.ceo/) image set
+A Tensorflow model trained on the [dog.ceo](https://dog.ceo/) image set and a web app to serve predictions
 
 ## Training
 
