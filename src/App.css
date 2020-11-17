@@ -2,7 +2,7 @@
   background-color: #282c34;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
