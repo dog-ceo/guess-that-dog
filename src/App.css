@@ -41,3 +41,7 @@ button {
   z-index: 9999;
   padding: 5px;
 }
+
+#result:empty {
+  display:none;
+}
