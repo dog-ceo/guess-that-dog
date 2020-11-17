@@ -29,13 +29,14 @@ input {
 
 button {
   z-index: 9999;
+  padding: 5px;
 }
 
 #result {
   margin-top: 10px;
   color: white;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 18px;
   background-color: black;
   opacity: 0.5;
   z-index: 9999;

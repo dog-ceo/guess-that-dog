@@ -17,7 +17,7 @@ function App() {
   }, []);
 
   function handleClick() {
-    fileInput.current.click()
+    fileInput.current!.click()
   }
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
@@ -26,10 +26,12 @@ function App() {
     const reader = new FileReader();
 
     reader.onload = (event) => {
-      setImgSrc(event.target.result as string);
+      setImgSrc(event.target!.result as string);
     };
 
-    reader.readAsDataURL(event.target.files[0]);
+    if (event.target.files) {
+      reader.readAsDataURL(event.target.files[0]);
+    }
   }
 
   async function handleLoad(event: ChangeEvent<HTMLImageElement>) {
@@ -74,7 +76,7 @@ function App() {
     <div>
       <div id="main" style={{ backgroundImage: `url(${imgSrc})` }}>
         <div className="controls">
-          <input type='file' ref={fileInput} onChange={handleChange} />
+          <input type='file' ref={fileInput} onChange={handleChange} accept="image/*" />
           <button id='upload' onClick={handleClick} >Submit a dog image</button>
           <div id="result">{message}</div>
         </div>
