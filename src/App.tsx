@@ -8,16 +8,16 @@ function App() {
   const [model, setModel] = useState<GraphModel>();
   const [imgSrc, setImgSrc] = useState('');
   const [message, setMessage] = useState('');
-  const fileInput = React.useRef<HTMLInputElement>();
+  const fileInput = React.createRef<HTMLInputElement>();
 
   useEffect(() => {
-    (async function loadModel() {
+    (async () => {
       setModel(await tf.loadGraphModel('model/1/model.json'));
     })();
   }, []);
 
   function handleClick() {
-    fileInput.current!.click()
+    fileInput.current!.click();
   }
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
@@ -42,7 +42,7 @@ function App() {
     const normalized = resized.div(offset);
     const batched = normalized.expandDims(0);
 
-    const outputTensor = await model.predict(batched) as tf.Tensor;
+    const outputTensor = await model!.predict(batched) as tf.Tensor;
     const prediction = await outputTensor.data();
 
     const guesses = Array.from(prediction).map((probability, index) => ({
@@ -69,7 +69,7 @@ function App() {
       confidenceWord = 'only a little bit'
     }
 
-    setMessage(`So I'm ${confidenceWord} sure that is a ${bestGuess.breed}?`);
+    setMessage(`So I'm ${confidenceWord} sure that is a ${bestGuess.breed} ?`);
   }
 
   return (
