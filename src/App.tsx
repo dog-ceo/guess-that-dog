@@ -51,25 +51,32 @@ function App() {
     })).sort((a,b) => b.probability - a.probability);
 
     const bestGuess = guesses[0];
-    const confidence = Math.round(bestGuess.probability * 100);
+    const nextBestGuess = guesses[1];
+    const confidence = bestGuess.probability;
 
     let confidenceWord;
 
-    if (confidence >= 90) {
+    if (confidence >= 0.9) {
       confidenceWord = 'pretty'
-    } else if (confidence >= 80) {
+    } else if (confidence >= 0.8) {
       confidenceWord = 'quite'
-    } else if (confidence >= 60) {
+    } else if (confidence >= 0.6) {
       confidenceWord = 'kinda'
-    } else if (confidence >= 40) {
+    } else if (confidence >= 0.4) {
       confidenceWord = 'vaguely'
-    } else if (confidence >= 20) {
+    } else if (confidence >= 0.2) {
       confidenceWord = 'only slightly'
     } else {
       confidenceWord = 'only a little bit'
     }
 
-    setMessage(`So I'm ${confidenceWord} sure that is a ${bestGuess.breed} ?`);
+    let message = `So I'm ${confidenceWord} sure that is a ${bestGuess.breed}`;
+
+    if (confidence < 0.5) {
+      message = `${message} or maybe a ${nextBestGuess.breed}`;
+    }
+
+    setMessage(`${message} ?`);
   }
 
   return (
