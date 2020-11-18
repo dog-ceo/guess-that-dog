@@ -16,7 +16,7 @@ img {
 }
 
 .controls {
-  width: 500px;
+  width: 90%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -41,7 +41,7 @@ button {
   opacity: 0.6;
   z-index: 9999;
   padding: 5px;
-  max-width: 70%;
+  max-width: 90%;
   text-align: center;
 }
 
