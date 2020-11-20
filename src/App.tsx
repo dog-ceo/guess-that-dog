@@ -29,7 +29,7 @@ function App() {
       setImgSrc(event.target!.result as string);
     };
 
-    if (event.target.files) {
+    if (event.target.files && event.target.files.length > 0) {
       reader.readAsDataURL(event.target.files[0]);
     }
   }
