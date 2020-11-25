@@ -12,7 +12,7 @@ function App() {
 
   useEffect(() => {
     (async () => {
-      setModel(await tf.loadGraphModel('model/1/model.json'));
+      setModel(await tf.loadGraphModel('model/2/model.json'));
     })();
   }, []);
 
